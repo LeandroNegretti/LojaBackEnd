@@ -2,7 +2,7 @@ const Usuario = require("../models/Usuario");
 
 class UsuarioRepository {
   // Método para criar usuário
-  async CriarUsuario(data) {
+  async criarUsuario(data) {
     try {
       return await Usuario.create(data);
     } catch (error) {

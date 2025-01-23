@@ -1,4 +1,5 @@
 const UsuarioRepository = require('../repositories/UsuarioRepository');
+const Usuario = require('../models/Usuario');
 
 class UsuarioService {
     async criarUsuario(data) {
@@ -59,6 +60,17 @@ class UsuarioService {
     } catch (error) {
       console.error(`Erro ao excluir usuário com ID ${id}:`, error);
       throw new Error('Erro ao excluir usuário');
+    }
+  }
+
+  // Função para buscar usuário por email
+  async buscarUsuarioPorEmail(email) {
+    try {
+      const usuario = await Usuario.findOne({ where: { email }});
+      return usuario;
+    } catch (error) {
+      console.error('Erro ao buscar usuário por email: ', error);
+      throw new Error('Erro ao buscar usuário');
     }
   }
 }
