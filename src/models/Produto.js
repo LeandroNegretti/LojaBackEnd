@@ -25,7 +25,8 @@ const Produto = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    sku: {
+    //Unidade de Manutenção de Estoque
+    ume: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
