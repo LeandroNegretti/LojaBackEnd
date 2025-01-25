@@ -1,10 +1,10 @@
-import ProdutoRepository from "../repositories/ProdutoRepository";
+import ProdutoService from '../services/ProdutoService.js';
 
 class ProdutoController {
   // Listar todos os produtos
   async listarTodosProdutos(req, res) {
     try {
-      const produtos = await ProdutoRepository.listarTodosProdutos();
+      const produtos = await ProdutoService.listarTodosProdutos();
       return res.status(200).json(produtos);
     } catch (error) {
       return res
@@ -18,7 +18,7 @@ class ProdutoController {
   async buscarProdutosPorId(req, res) {
     try {
       const { id } = req.params;
-      const produto = await ProdutoRepository.buscarProdutosPorId(id);
+      const produto = await ProdutoService.buscarProdutosPorId(id);
 
       if (!produto) {
         return res.status(404).json({ mensagem: "Produto não encontrado. " });
@@ -36,7 +36,7 @@ class ProdutoController {
   async criarProduto(req, res) {
     try {
       const dadosProduto = req.body;
-      const novoProduto = await ProdutoRepository.criarProduto(dadosProduto);
+      const novoProduto = await ProdutoService.criarProduto(dadosProduto);
 
       return res.status(201).json(novoProduto);
     } catch (error) {
@@ -52,7 +52,7 @@ class ProdutoController {
       const { id } = req.params;
       const dadosAtualizados = req.body;
 
-      const produtoAtualizado = await ProdutoRepository.atualizarProduto(
+      const produtoAtualizado = await ProdutoService.atualizarProduto(
         id,
         dadosAtualizados
       );
@@ -74,7 +74,7 @@ class ProdutoController {
     try {
       const { id } = req.params;
 
-      const mensagem = await ProdutoRepository.deletarProduto(id);
+      const mensagem = await ProdutoService.deletarProduto(id);
 
       return res.status(200).json(mensagem);
     } catch (error) {
