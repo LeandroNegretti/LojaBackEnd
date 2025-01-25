@@ -2,6 +2,7 @@
 const Usuario = require("../models/Usuario");
 const UsuarioService = require("../services/UsuarioService");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 
 class UsuarioController {
   async criarUsuario(req, res) {
@@ -20,6 +21,8 @@ class UsuarioController {
       };
       // Hash da senha antes de salvar no banco de dados
       const hashedPassword = await bcrypt.hash(usuarioData.senha, 10); // 10 é o número de salt rounds
+
+
 
       // Substitui a senha original pela versão hashada
       usuarioData.senha = hashedPassword;
@@ -101,6 +104,13 @@ class UsuarioController {
         return res.status(401).json({ message: "Senha incorreta" });
       }
 
+      // Gerar o token JWT
+      const token = JsonWebTokenError.sign(
+        {id: usuario.id, email: usuario.email}, // Payload com os dados do usuário
+        process.env.JWT_SECRET, // Chave secreta
+        { expiresIn: '2h' } // Expira em 2 horas
+      );
+
       // Se a senha for correta, retorna o usuário (sem a senha)
       return res.status(200).json({
         sucess: true,
@@ -109,6 +119,7 @@ class UsuarioController {
           name: usuario.name,
           email: usuario.email,
         },
+        token,
       });
     } catch (error) {
       console.error("Erro ao realizar login:", error);
