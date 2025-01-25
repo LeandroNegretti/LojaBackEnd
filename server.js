@@ -20,8 +20,10 @@ app.use(
 app.use(express.json());
 
 const usuarioRoutes = require("./src/routes/UsuarioRoutes");
+const produtoRoutes = require("./src/routes/ProdutoRoutes");
 
 app.use("/api/", usuarioRoutes);
+app.use("/api/", produtoRoutes);
 
 // Função para conectar ao banco de dados
 const connectDB = async () => {
