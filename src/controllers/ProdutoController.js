@@ -1,4 +1,4 @@
-import ProdutoService from '../services/ProdutoService.js';
+const ProdutoService = require('../services/ProdutoService');
 
 class ProdutoController {
   // Listar todos os produtos
