@@ -15,10 +15,10 @@ class ProdutoController {
 
   // Biscar um produto por ID
 
-  async buscarProdutoPorId(req, res) {
+  async buscarProdutosPorId(req, res) {
     try {
       const { id } = req.params;
-      const produto = await ProdutoRepository.buscarProdutoPorId(id);
+      const produto = await ProdutoRepository.buscarProdutosPorId(id);
 
       if (!produto) {
         return res.status(404).json({ mensagem: "Produto não encontrado. " });
