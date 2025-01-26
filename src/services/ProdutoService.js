@@ -1,4 +1,4 @@
-import ProdutoRepository from '../repositories/ProdutoRepository.js';
+const ProdutoRepository = require('../repositories/ProdutoRepository');
 
 class ProdutoService {
   // 1. Listar todos os produtos
@@ -42,7 +42,7 @@ class ProdutoService {
 
   // 5. Deletar um produto
   async deletarProduto(id) {
-    const produtoExistente = await ProdutoRepository.buscarPorId(id);
+    const produtoExistente = await ProdutoRepository.buscarProdutosPorId(id);
 
     if (!produtoExistente) {
       throw new Error('Produto não encontrado.');

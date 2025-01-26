@@ -1,4 +1,4 @@
-import Produto from "../models/Produto";
+const Produto = require('../models/Produto');
 
 class ProdutoRepository {
   // Listar todos os produtos
